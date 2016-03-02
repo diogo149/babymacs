@@ -16,6 +16,11 @@ ln -s /usr/local/Cellar/emacs/24.5/Emacs.app /Applications
 TODO
 - movement
 - editting
+- help
+  - C-h C-m discover-my-major
+- buffer-move
+- move-text
+- winner-mode
 *** magit
 TODO
 *** org
@@ -32,8 +37,25 @@ TODO
   - bind-key
   - examples
 * TODOs
+- general
+  - winner-mode
+  - comment / uncomment
+  - trailing whitespace (ws-butler)
+  - require-final-newline
+  - multiple cursors
+  - isearch
+- prog-mode stuff
+  - no word wrapping (truncate-lines-mode)
+  - highlight-parentheses-mode
+  - yasnippet
+  - flycheck
+  - company
+  - smartparens
 - projectile
 - python stuff
   - elpy? anaconda?
-- multiple cursors
-- company
+  - make sure it has jump to/from definition
+- dired customization?
+- git-timemachine
+- wgrep
+- pcre2el

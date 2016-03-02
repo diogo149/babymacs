@@ -126,6 +126,39 @@
 ;; highlight matching parentheses when the point is on them
 (show-paren-mode 1)
 
+;; buffer-move
+;; ---
+;; for swapping the buffers between windows
+(use-package buffer-move
+  :ensure t
+  ;; generic C-S-<cursor> keybindings
+  :bind (("<C-S-up>" . buf-move-up)
+	 ("<C-S-down>" . buf-move-down)
+	 ("<C-S-left>" . buf-move-left)
+	 ("<C-S-right>" . buf-move-right)))
+
+;; move-text
+;; ---
+;; allows moving lines / regions up and down in a file
+(use-package move-text
+  :ensure t
+  :bind (("<M-up>" . move-text-up)
+	 ("<M-down>" . move-text-down)))
+
+;; discover-my-major
+;; ---
+;; conveniently display major mode keybindings
+(use-package discover-my-major
+  :ensure t
+  :bind ("C-h C-m" . discover-my-major))
+
+;; expand-region
+;; ---
+;; easily select regions that make sense
+(use-package expand-region
+  :ensure t
+  :bind ("C-=" . er/expand-region))
+
 ;; magit
 ;; ---
 (use-package magit
@@ -152,6 +185,9 @@
 (setq org-ellipsis " \u25bc")
 ;; enable word-wrap and have commands work on lines visually
 (add-hook 'org-mode-hook 'visual-line-mode)
+;; use global (buffer-move) keys instead of org defaults
+(unbind-key "<C-S-up>" org-mode-map)
+(unbind-key "<C-S-down>" org-mode-map)
 
 ;; undo-tree
 ;; ---

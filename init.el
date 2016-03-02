@@ -280,6 +280,15 @@
       (progn
 	;; use jedi as backed (seems to have better completion)
 	(setq elpy-rpc-backend "jedi")
+	;; modify elpy modules to disable some
+	(setq elpy-modules
+	      '(elpy-module-sane-defaults
+		elpy-module-company
+		elpy-module-eldoc
+		;; elpy-module-flymake
+		;; elpy-module-highlight-indentation
+		;; elpy-module-pyvenv
+		elpy-module-yasnippet))
 	;; enable elpy
 	(elpy-enable)
 	;; pop tag to be consistent with lisps and beside M-.

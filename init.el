@@ -50,7 +50,19 @@
 ;; ---
 (use-package magit
   :ensure t
-  :commands (magit-status))
+  :commands (magit-status)
+  :config
+  (progn
+    ;; allow finishing commit with C-x C-s or s-s
+    (bind-key "C-x C-s" #'with-editor-finish git-commit-mode-map)
+    (bind-key "s-s" #'with-editor-finish git-commit-mode-map)
+
+    ;; improve magit-diff speed
+    (setq magit-highlight-whitespace nil)
+    (setq magit-highlight-trailing-whitespace nil)
+    (setq magit-diff-refine-hunk nil)
+    (setq magit-highlight-indentation nil)
+    ))
 
 ;; org-mode
 ;; ---

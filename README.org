@@ -42,6 +42,7 @@ ln -s /usr/local/Cellar/emacs/24.5/Emacs.app /Applications
 | C-+           | increase text size                       |
 | C--           | decrease text size                       |
 | S-<arrow>     | move cursor to other window              |
+| C-/           | toggle comment/uncomment                 |
 TODO
 - movement
 - editting
@@ -75,7 +76,6 @@ TODO
   - examples
 * TODOs
 - projectile
-- comment / uncomment
 - multiple cursors
 - general
   - trailing whitespace (ws-butler)

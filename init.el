@@ -15,6 +15,13 @@
 ;; refresh contents
 (when (not package-archive-contents)
   (package-refresh-contents))
+;; function to update packages
+(defun my/update-emacs-packages ()
+  (interactive)
+  (save-excursion
+    (package-list-packages)
+    (package-menu-mark-upgrades)
+    (package-menu-execute)))
 
 ;; use-package
 ;; ---
@@ -227,6 +234,12 @@
   :bind (("C-z" . undo-tree-undo)
 	 ("C-S-z" . undo-tree-redo)
 	 ("s-z" . undo-tree-undo)))
+
+;; evil-nerd-commenter
+;; ---
+(use-package evil-nerd-commenter
+  :bind ("C-/" . evilnc-comment-or-uncomment-lines)
+  :ensure t)
 
 ;; helm
 ;; ---

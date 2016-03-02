@@ -13,6 +13,11 @@ ln -s /usr/local/Cellar/emacs/24.5/Emacs.app /Applications
 #+END_SRC
 ** how to use
 *** general
+| C-x C-s | save                |
+| s-s     | save                |
+| C-x C-c | exit                |
+| s-q     | exit                |
+| C-x k   | kill current buffer |
 TODO
 - movement
 - editting
@@ -26,6 +31,7 @@ TODO
   - jedi
   - flake8
   - autopep8
+- to change virutalenv (from virtualenvwrapper), use =my/elpy-workon=
 *** magit
 TODO
 *** org

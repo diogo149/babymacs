@@ -312,6 +312,7 @@
 ;; ---
 ;; incremental search that works with multiple cursors
 ;; call with prefix to use normal isearch
+;; also seems to use PCRE regexes instead of emacs regexes
 (use-package phi-search
   :ensure t
   :bind (("C-s" . phi-search)

@@ -158,7 +158,6 @@
 
   (setq my/major-mode-keymaps (make-hash-table))
   (setq my/major-mode-key-prefix "<C-escape>")
-  (setq my/major-mode-prefix-key-chord ",.")
 
   (defun my/prefix-bind-key (mode-map key-string func)
     "Save major mode keybinding in keymap and in a hash table"
@@ -167,9 +166,6 @@
 		    (let ((pc (make-symbol "tmp")))
 		      (define-prefix-command pc)
 		      (bind-key my/major-mode-key-prefix pc mode-map)
-		      (key-chord-define mode-map
-					my/major-mode-prefix-key-chord
-					pc)
 		      (puthash mode-map pc my/major-mode-keymaps)
 		      pc)))))
       ;; bind-key doesn't work well with prefix commands

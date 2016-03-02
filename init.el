@@ -110,6 +110,12 @@
   )
 ;; keep history on windows: use C-c <left>/<right> to undo/redo window changes
 (winner-mode 1)
+;; have C-x k kill current buffer
+(defun my/kill-this-buffer ()
+  "Kill current buffer without prompt"
+  (interactive)
+  (kill-buffer (current-buffer)))
+(bind-key "C-x k" #'my/kill-this-buffer)
 
 ;; appearance
 ;; ---

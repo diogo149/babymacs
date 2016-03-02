@@ -1,0 +1,7 @@
+* babymacs
+a beginner setup for emacs that has some nice stuff built-in
+** installation
+simply:
+#+BEGIN_SRC sh
+git clone https://github.com/diogo149/babymacs.git ~/.emacs.d
+#+END_SRC

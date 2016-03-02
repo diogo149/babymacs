@@ -167,6 +167,18 @@
   :ensure t
   :bind ("C-=" . er/expand-region))
 
+;; flycheck
+;; ---
+;; package for linting code
+(use-package flycheck
+  :ensure t
+  :commands flycheck-mode
+  :config
+  (progn
+    ;; AIRPLANE unicode
+    (diminish 'flycheck-mode (string 32 #x2708))
+    ))
+
 ;; magit
 ;; ---
 (use-package magit

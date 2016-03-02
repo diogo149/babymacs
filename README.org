@@ -24,6 +24,13 @@ TODO
 TODO
 *** projectile
 TODO
+** how to extend
+- TODOs
+  - how to read elisp
+  - keybindings
+  - use-package
+  - bind-key
+  - examples
 * TODOs
 - helm
 - projectile

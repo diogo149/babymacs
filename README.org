@@ -12,12 +12,20 @@ brew install --with-cocoa emacs
 ln -s /usr/local/Cellar/emacs/24.5/Emacs.app /Applications
 #+END_SRC
 ** how to use
+*** reading keybindings
+- =C-= :: control
+- =M-= :: meta (alt)
+- =S-= :: shift
+- =s-= :: super (eg. OS X command key)
+- examples:
+  - =C-M-<up>= :: pressing control + alt + up at the same time
+  - =C-x C-s= :: pressing control + x then control + s
 *** general
-| C-x C-s | save                |
-| s-s     | save                |
-| C-x C-c | exit                |
-| s-q     | exit                |
-| C-x k   | kill current buffer |
+| C-x k    | kill current buffer                      |
+| C-w      | cut selected region / current line       |
+| M-w      | copy selected region / current line      |
+| M-<up>   | move selected region / current line up   |
+| M-<down> | move selected region / current line down |
 TODO
 - movement
 - editting

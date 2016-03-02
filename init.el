@@ -344,7 +344,7 @@
     ;; enable globally
     (projectile-global-mode)
 
-    (defun projectile-in-project? ()
+    (defun my/projectile-in-project? ()
       "Returns project root if in project, else nil"
       (ignore-errors (projectile-project-root)))
 

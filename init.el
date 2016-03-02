@@ -212,6 +212,7 @@
 ;; ---
 (use-package helm
   :ensure t
+  :demand t
   :bind (("M-x" . helm-M-x)
 	 ("M-y" . helm-show-kill-ring)
 	 ("C-x C-f" . helm-find-files)

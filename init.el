@@ -36,6 +36,78 @@
 ;; enable recent file mode (to easily reopen recent files)
 (recentf-mode)
 (setq recentf-max-saved-items 500)
+;; set default tab width
+(setq tab-width 4)
+;; when files change, have buffers automatically revert to stay in sync with
+;; the filesystem (doesn't work on editted files - careful!)
+(global-auto-revert-mode t)
+;; keybinding to delete whitespace
+(bind-key "S-<backspace>" #'delete-horizontal-space)
+;; start in fundamental-mode
+(setq initial-major-mode 'fundamental-mode)
+;; make overwriting an external copy with an emacs copy add the external
+;; copy to the kill ring
+(setq save-interprogram-paste-before-kill t)
+;; make scrolling smoother
+(progn
+  ;; only start scrolling when cursor is very close to edge of screen
+  (setq scroll-margin 1)
+  ;; don't recenter the cursor
+  (setq scroll-conservatively 1000)
+  (setq-default scroll-up-aggressively 0.01
+                scroll-down-aggressively 0.01)
+  )
+;; show column numbers along with line numbers
+(column-number-mode)
+;; change smoothness of mouse scrolling
+(progn
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
+  (setq mouse-wheel-progressive-speed t))
+;; when calling kill-ring-save (M-w) or kill-region (C-w) without a selection,
+;; assume it means the current line
+(defadvice kill-ring-save (before slick-copy activate compile)
+  "When called interactively with no active region, copy a single line instead."
+  (interactive (if mark-active (list (region-beginning) (region-end))
+		 (list (line-beginning-position)
+		       (line-beginning-position 2)))))
+(defadvice kill-region (before slick-cut activate compile)
+  "When called interactively with no active region, kill a single line instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end))
+     (list (line-beginning-position)
+	   (line-beginning-position 2)))))
+;; stop writing temporary files
+(progn
+  ;; disable autosaving (e.g. no #filename#)
+  (setq auto-save-default nil)
+  ;; disable creating lockfiles (eg. .#foo.bar)
+  (setq create-lockfiles nil)
+  ;; disable writing to backup files
+  (setq make-backup-files nil)
+  )
+;; make C-v / M-v / C-S-v / M-S-v use a half page instead of full
+(progn
+  (defun half-window-height ()
+    (/ (window-height) 2))
+  (defun move-down-half-window ()
+    (interactive)
+    (next-logical-line (half-window-height)))
+  (defun move-up-half-window ()
+    (interactive)
+    (previous-logical-line (half-window-height)))
+  (defun scroll-down-half-window (&optional arg)
+    (interactive)
+    (dotimes (x (or arg (half-window-height)))
+      (scroll-down-line)))
+  (defun scroll-up-half-window (&optional arg)
+    (interactive)
+    (dotimes (x (or arg (half-window-height)))
+      (scroll-up-line)))
+  (bind-key "C-v" #'move-down-half-window)
+  (bind-key "M-v" #'move-up-half-window)
+  (bind-key "C-S-v" #'scroll-up-half-window)
+  (bind-key "M-V" #'scroll-down-half-window)
+  )
 
 ;; appearance
 ;; ---
@@ -45,6 +117,14 @@
 (blink-cursor-mode -1)
 ;; remove the tool bar
 (tool-bar-mode -1)
+;; highlight the current line
+(global-hl-line-mode 1)
+(set-face-background 'hl-line "#FFD")
+;; use C-+ or C-- to change text size
+(bind-key "C-+" #'text-scale-increase)
+(bind-key "C--" #'text-scale-decrease)
+;; highlight matching parentheses when the point is on them
+(show-paren-mode 1)
 
 ;; magit
 ;; ---

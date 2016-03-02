@@ -4,6 +4,12 @@
 (let ((gc-cons-threshold 100000000)
       (file-name-handler-alist nil))
 
+;; initial setup
+(setq
+ my/graphical? window-system
+ my/osx? (eq system-type 'darwin)
+ my/linux? (eq system-type 'gnu/linux))
+
 ;; package stuff
 ;; ---
 ;; don't activate packages at startup (use-package can do this for us)
@@ -142,6 +148,7 @@
 (show-paren-mode 1)
 
 ;; functions for global prefix and major mode prefix
+;; ---
 (progn
   (define-prefix-command 'my/global-keymap)
   (setq my/global-key-prefix "<escape>")
@@ -172,6 +179,54 @@
       ;; (specifically descibe-personal-keybindings)
       (define-key pc (kbd key-string) func)))
   )
+
+;; dired
+;; ---
+(eval-after-load 'dired
+  '(progn
+     ;; show human readable file sizes and use natural sort of numbers
+     (setq-default dired-listing-switches "-alhv1G --group-directories-first")
+     ;; copy and delete recursively without asking
+     ;; (there is still an initial dialog box for delete)
+     (setq dired-recursive-copies 'always)
+     (setq dired-recursive-deletes 'always)
+     ;; if you have multiple dired buffers open, when selecting a target
+     ;; directory, use the directory in the other open window instead of
+     ;; the current directory as a target
+     (setq dired-dwim-target t)
+     ;; kill dired buffer with q
+     (bind-key "q" #'my/kill-this-buffer dired-mode-map)
+
+
+     ;; set default program for opening files
+     (setq dired-guess-shell-alist-user
+	   (if my/osx?
+	       '((".*" "open"))
+	     '((".*" "xdg-open"))))
+
+     ;; allow opening file with r
+     (defun my/dired-start-process (cmd &optional file-list)
+       (interactive
+	(let ((files (dired-get-marked-files
+		      t current-prefix-arg)))
+	  (list
+	   (dired-read-shell-command "& on %s: "
+				     current-prefix-arg files)
+	   files)))
+       (let (list-switch)
+	 (start-process
+	  cmd nil shell-file-name
+	  shell-command-switch
+	  (format
+	   "nohup 1>/dev/null 2>/dev/null %s %s"
+	   cmd
+	   (format
+	    ;; add outer quotation marks
+	    "\"%s\""
+	    ;; add quotation marks in between file names
+	    (mapconcat #'expand-file-name file-list "\" \""))))))
+     (define-key dired-mode-map "r" #'my/dired-start-process)
+     ))
 
 ;; buffer-move
 ;; ---

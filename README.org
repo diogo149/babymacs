@@ -32,8 +32,8 @@ TODO
   - bind-key
   - examples
 * TODOs
-- helm
 - projectile
 - python stuff
   - elpy? anaconda?
 - multiple cursors
+- company

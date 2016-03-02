@@ -228,6 +228,12 @@
 	 ("C-S-z" . undo-tree-redo)
 	 ("s-z" . undo-tree-undo)))
 
+;; evil-nerd-commenter
+;; ---
+(use-package evil-nerd-commenter
+  :bind ("C-/" . evilnc-comment-or-uncomment-lines)
+  :ensure t)
+
 ;; helm
 ;; ---
 (use-package helm

@@ -35,6 +35,8 @@ ln -s /usr/local/Cellar/emacs/24.5/Emacs.app /Applications
 | C-x k         | kill current buffer                      |
 | C-w           | cut selected region / current line       |
 | M-w           | copy selected region / current line      |
+| C-v           | half page down                           |
+| M-v           | half page up                             |
 | M-<up>        | move selected region / current line up   |
 | M-<down>      | move selected region / current line down |
 | S-<backspace> | delete all whitespace on cursor          |
@@ -86,6 +88,16 @@ TODO
 | C-<         | add cursor on previous instance of highlighted region |
 | C-c C-<     | add cursor at all instances of highlighted region     |
 | C-S-c C-S-c | add cursor on each line in the highlighted region     |
+*** dired
+| q   | kill buffer                    |
+| ^   | go up a directory              |
+| RET | open file                      |
+| r   | open file(s) with external app |
+| C   | copy file(s)                   |
+| R   | rename/move file(s)            |
+| D   | delete file(s)                 |
+| m   | mark file                      |
+| g   | refresh                        |
 *** helm
 TODO
 *** magit
@@ -111,6 +123,5 @@ TODO
   - company
     - helm-company
   - smartparens
-- dired customization?
 - wgrep
 - pcre2el

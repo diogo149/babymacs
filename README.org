@@ -59,13 +59,19 @@ TODO
   - flake8
   - autopep8
 - to change virutalenv (from virtualenvwrapper), use =my/elpy-workon=
+*** multiple-cursors
+| C-j         | add newline                                           |
+| M-<mouse-1> | add extra cursor                                      |
+| C->         | add cursor on next instance of highlighted region     |
+| C-<         | add cursor on previous instance of highlighted region |
+| C-c C-<     | add cursor at all instances of highlighted region     |
+| C-S-c C-S-c | add cursor on each line in the highlighted region     |
+*** projectile
+*** helm
+TODO
 *** magit
 TODO
 *** org
-TODO
-*** helm
-TODO
-*** projectile
 TODO
 ** how to extend
 - TODOs
@@ -75,8 +81,6 @@ TODO
   - bind-key
   - examples
 * TODOs
-- projectile
-- multiple cursors
 - general
   - trailing whitespace (ws-butler)
   - require-final-newline
@@ -89,6 +93,5 @@ TODO
     - helm-company
   - smartparens
 - dired customization?
-- git-timemachine
 - wgrep
 - pcre2el

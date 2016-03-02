@@ -186,17 +186,6 @@
     (diminish 'flycheck-mode (string 32 #x2708))
     ))
 
-;; projectile
-;; ---
-(use-package projectile
-  :ensure t
-  :diminish projectile-mode
-  :config
-  (progn
-    ;; enable globally
-    (projectile-global-mode)
-    ))
-
 ;; magit
 ;; ---
 (use-package magit
@@ -214,6 +203,23 @@
     (setq magit-diff-refine-hunk nil)
     (setq magit-highlight-indentation nil)
     ))
+
+;; multiple-cursors
+;; ---
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C-S-c C-S-c" . mc/edit-lines)
+	 ("C->" . mc/mark-next-like-this)
+	 ("C-<" . mc/mark-previous-like-this)
+	 ("C-c C-<" . mc/mark-all-like-this)
+	 ("M-<down-mouse-1>" . mc/no-op-load))
+  :config
+  (progn
+    (defun mc/no-op-load ())
+    ;; need to bind then unbind M-<down-mouse-1> because M-<mouse-1>
+    ;; by itself doesn't cause the package to load
+    (unbind-key "M-<down-mouse-1>")
+    (bind-key "M-<mouse-1>" 'mc/add-cursor-on-click)))
 
 ;; org-mode
 ;; ---
@@ -290,6 +296,31 @@
 	  (backward-delete-char 1)
 	(error
 	 (helm-keyboard-quit))))
+    ))
+
+;; projectile
+;; ---
+(use-package projectile
+  :ensure t
+  :diminish projectile-mode
+  :config
+  (progn
+    ;; enable globally
+    (projectile-global-mode)
+
+    (defun projectile-in-project? ()
+      "Returns project root if in project, else nil"
+      (ignore-errors (projectile-project-root)))
+
+    (use-package helm-projectile
+      :ensure t)
+
+    (defun my/projectile-helm-or-switch-project-dwim (&optional arg)
+      "Either runs helm-projectile or projectile-switch-project depending on context"
+      (interactive)
+      (if (my/projectile-in-project?)
+	  (helm-projectile arg)
+	(helm-projectile-switch-project arg)))
     ))
 
 ;; python

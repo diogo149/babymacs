@@ -185,7 +185,7 @@
 (eval-after-load 'dired
   '(progn
      ;; show human readable file sizes and use natural sort of numbers
-     (setq-default dired-listing-switches "-alhv1G --group-directories-first")
+     (setq-default dired-listing-switches "-alhv")
      ;; copy and delete recursively without asking
      ;; (there is still an initial dialog box for delete)
      (setq dired-recursive-copies 'always)

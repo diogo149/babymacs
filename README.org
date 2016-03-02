@@ -49,6 +49,7 @@ TODO
   - yasnippet
   - flycheck
   - company
+    - helm-company
   - smartparens
 - projectile
 - python stuff

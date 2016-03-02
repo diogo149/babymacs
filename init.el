@@ -186,6 +186,17 @@
     (diminish 'flycheck-mode (string 32 #x2708))
     ))
 
+;; projectile
+;; ---
+(use-package projectile
+  :ensure t
+  :diminish projectile-mode
+  :config
+  (progn
+    ;; enable globally
+    (projectile-global-mode)
+    ))
+
 ;; magit
 ;; ---
 (use-package magit

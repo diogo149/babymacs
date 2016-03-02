@@ -53,20 +53,39 @@ TODO
 - winner-mode
 **** commands
 | ibuffer | view open buffers and perform commands on them |
+*** prefix
+- NOTE: normally in emacs, pressing <escape> is also used for meta, but this config uses <escape> and <C-escape> as prefix keys for general commands and major-mode specific commands, respectively.
+| <escape> +       | balance the size of windows           |
+| <escape> 0       | delete current window                 |
+| <escape> 1       | delete all windows except current     |
+| <escape> 2       | split window vertically               |
+| <escape> 3       | split window horizontally             |
+| <escape> 4       | split window into 4                   |
+| <escape> <up>    | move up one logical (not visual) line |
+| <escape> <down>  | move down one logical line            |
+| <escape> <left>  | move to start of logical line         |
+| <escape> <right> | move to end of logical line           |
+| <escape> [       | begin recording macro                 |
+| <escape> ]       | end recording macro                   |
+| <escape> C-s     | switch project                        |
+| <escape> C-f     | find file in project                  |
+| <escape> m       | open magit                            |
+| <escape> d       | open dired                            |
+| <escape> s       | open shell                            |
 *** python
 - make sure the environment (eg. virtualenv) you're using has the following packages:
   - jedi
   - flake8
   - autopep8
-- to change virutalenv (from virtualenvwrapper), use =my/elpy-workon=
+| <C-escape> w | choose virtualenv |
 *** multiple-cursors
+| RET         | exit multiple cursors                                 |
 | C-j         | add newline                                           |
 | M-<mouse-1> | add extra cursor                                      |
 | C->         | add cursor on next instance of highlighted region     |
 | C-<         | add cursor on previous instance of highlighted region |
 | C-c C-<     | add cursor at all instances of highlighted region     |
 | C-S-c C-S-c | add cursor on each line in the highlighted region     |
-*** projectile
 *** helm
 TODO
 *** magit

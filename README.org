@@ -37,6 +37,8 @@ ln -s /usr/local/Cellar/emacs/24.5/Emacs.app /Applications
 | M-w           | copy selected region / current line      |
 | C-v           | half page down                           |
 | M-v           | half page up                             |
+| C-s           | search forward                           |
+| C-r           | search backward                          |
 | M-<up>        | move selected region / current line up   |
 | M-<down>      | move selected region / current line down |
 | S-<backspace> | delete all whitespace on cursor          |
@@ -45,6 +47,12 @@ ln -s /usr/local/Cellar/emacs/24.5/Emacs.app /Applications
 | C--           | decrease text size                       |
 | S-<arrow>     | move cursor to other window              |
 | C-/           | toggle comment/uncomment                 |
+
+when searching:
+| C-s | find next match     |
+| C-r | find previous match |
+| RET | end search          |
+
 TODO
 - movement
 - editting
@@ -115,7 +123,6 @@ TODO
 - general
   - trailing whitespace (ws-butler)
   - require-final-newline
-  - isearch
 - prog-mode stuff
   - no word wrapping (truncate-lines-mode)
   - highlight-parentheses-mode
@@ -124,4 +131,3 @@ TODO
     - helm-company
   - smartparens
 - wgrep
-- pcre2el

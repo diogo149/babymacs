@@ -308,6 +308,16 @@
     (unbind-key "M-<down-mouse-1>")
     (bind-key "M-<mouse-1>" 'mc/add-cursor-on-click)))
 
+;; phi-search
+;; ---
+;; incremental search that works with multiple cursors
+;; call with prefix to use normal isearch
+(use-package phi-search
+  :ensure t
+  :bind (("C-s" . phi-search)
+         ("C-r" . phi-search-backward)
+         ("M-%" . phi-replace-query)))
+
 ;; org-mode
 ;; ---
 (use-package org

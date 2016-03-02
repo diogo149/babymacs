@@ -141,6 +141,42 @@
 ;; highlight matching parentheses when the point is on them
 (show-paren-mode 1)
 
+;; functions for global prefix and major mode prefix
+(progn
+  (define-prefix-command 'my/global-keymap)
+  (setq my/global-key-prefix "<escape>")
+
+  (unbind-key my/global-key-prefix)
+  (unbind-key my/global-key-prefix)
+  (bind-key my/global-key-prefix 'my/global-keymap)
+
+  (defun my/prefix-bind-global-key (key-string func)
+    "Save global keybind in keymap and in a hash table"
+    ;; bind-key doesn't work well with prefix commands
+    ;; (specifically descibe-personal-keybindings)
+    (define-key 'my/global-keymap (kbd key-string) func))
+
+  (setq my/major-mode-keymaps (make-hash-table))
+  (setq my/major-mode-key-prefix "<C-escape>")
+  (setq my/major-mode-prefix-key-chord ",.")
+
+  (defun my/prefix-bind-key (mode-map key-string func)
+    "Save major mode keybinding in keymap and in a hash table"
+    (let ((pc (or (gethash mode-map my/major-mode-keymaps)
+		  (progn
+		    (let ((pc (make-symbol "tmp")))
+		      (define-prefix-command pc)
+		      (bind-key my/major-mode-key-prefix pc mode-map)
+		      (key-chord-define mode-map
+					my/major-mode-prefix-key-chord
+					pc)
+		      (puthash mode-map pc my/major-mode-keymaps)
+		      pc)))))
+      ;; bind-key doesn't work well with prefix commands
+      ;; (specifically descibe-personal-keybindings)
+      (define-key pc (kbd key-string) func)))
+  )
+
 ;; buffer-move
 ;; ---
 ;; for swapping the buffers between windows
@@ -404,7 +440,56 @@
 
 	(add-hook 'python-mode-hook #'my/py-autopep8-on)
 	))
+
+    (dolist (x '(("w" my/elpy-workon)
+		 ;; because elpy overwrites these keys
+		 ("M-<up>" move-text-up)
+		 ("M-<down>" move-text-down)))
+      (apply 'my/prefix-bind-key python-mode-map x))
     ))
+
+;; setup global prefix keymap
+(progn
+  (defun my/split4 ()
+    "split window into 4 windows"
+    (interactive)
+    (split-window-below)
+    (split-window-horizontally)
+    (windmove-down)
+    (split-window-horizontally)
+    (windmove-up))
+
+  ;; need to add aliases, because keybindings on the actual function
+  ;; are overwritten for visual-line-mode
+  (defalias 'my/move-beginning-of-line #'move-beginning-of-line)
+  (defalias 'my/move-end-of-line #'move-end-of-line)
+
+  (dolist (x `(("+" balance-windows)
+	       ("0" delete-window)
+	       ("1" delete-other-windows)
+	       ("2" split-window-below)
+	       ("3" split-window-right)
+	       ("4" my/split4)
+	       ("5" make-frame-command)
+	       ("6" clone-indirect-buffer-other-window)
+	       ;; movement
+	       ("<up>" previous-logical-line)
+	       ("<down>" next-logical-line)
+	       ("<left>" my/move-beginning-of-line)
+	       ("<right>" my/move-end-of-line)
+	       ;; macros
+	       ("[" kmacro-start-macro-or-insert-counter)
+	       ("]" kmacro-end-or-call-macro)
+	       ;; projectile
+	       ("C-s" helm-projectile-switch-project)
+	       ("C-f" my/projectile-helm-or-switch-project-dwim)
+	       ;; launch commands
+	       ("m" magit-status)
+	       ("d" dired-jump)
+	       ("s" shell)
+	       ))
+    (apply 'my/prefix-bind-global-key x))
+  )
 
 )
 (message ".emacs.d loaded in %fs" (- (float-time) *emacs-load-start*))

@@ -11,3 +11,22 @@ git clone https://github.com/diogo149/babymacs.git ~/.emacs.d
 brew install --with-cocoa emacs
 ln -s /usr/local/Cellar/emacs/24.5/Emacs.app /Applications
 #+END_SRC
+** how to use
+*** general
+TODO
+- movement
+- editting
+*** magit
+TODO
+*** org
+TODO
+*** helm
+TODO
+*** projectile
+TODO
+* TODOs
+- helm
+- projectile
+- python stuff
+  - elpy? anaconda?
+- multiple cursors

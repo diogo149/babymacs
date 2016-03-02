@@ -179,15 +179,24 @@
 
 ;; org-mode
 ;; ---
-;; don't set S-<cursor> keys (because windmove uses them)
-(setq org-replace-disputed-keys t)
-;; use arrow instead of default ellipsis
-(setq org-ellipsis " \u25bc")
-;; enable word-wrap and have commands work on lines visually
-(add-hook 'org-mode-hook 'visual-line-mode)
-;; use global (buffer-move) keys instead of org defaults
-(unbind-key "<C-S-up>" org-mode-map)
-(unbind-key "<C-S-down>" org-mode-map)
+(use-package org
+  :ensure t
+  :mode ("\\.org$" . org-mode)
+  :init
+  (progn
+    ;; don't set S-<cursor> keys (because windmove uses them)
+    (setq org-replace-disputed-keys t)
+    )
+  :config
+  (progn
+    ;; use arrow instead of default ellipsis
+    (setq org-ellipsis " \u25bc")
+    ;; enable word-wrap and have commands work on lines visually
+    (add-hook 'org-mode-hook 'visual-line-mode)
+    ;; use global (buffer-move) keys instead of org defaults
+    (unbind-key "<C-S-up>" org-mode-map)
+    (unbind-key "<C-S-down>" org-mode-map)
+    ))
 
 ;; undo-tree
 ;; ---

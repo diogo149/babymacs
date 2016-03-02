@@ -67,8 +67,7 @@
   :ensure t
   :bind (("C-z" . undo-tree-undo)
 	 ("C-S-z" . undo-tree-redo)
-	 ("s-z" . undo-tree-undo)
-	 ("s-S-z" . undo-tree-redo)))
+	 ("s-z" . undo-tree-undo)))
 
 ;; helm
 ;; ---

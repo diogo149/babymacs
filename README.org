@@ -131,3 +131,4 @@ TODO
     - helm-company
   - smartparens
 - wgrep
+- dired-ranger

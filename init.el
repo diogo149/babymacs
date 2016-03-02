@@ -189,6 +189,8 @@
     )
   :config
   (progn
+    ;; indent headings
+    (setq org-startup-indented t)
     ;; use arrow instead of default ellipsis
     (setq org-ellipsis " \u25bc")
     ;; enable word-wrap and have commands work on lines visually

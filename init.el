@@ -15,6 +15,13 @@
 ;; refresh contents
 (when (not package-archive-contents)
   (package-refresh-contents))
+;; function to update packages
+(defun my/update-emacs-packages ()
+  (interactive)
+  (save-excursion
+    (package-list-packages)
+    (package-menu-mark-upgrades)
+    (package-menu-execute)))
 
 ;; use-package
 ;; ---

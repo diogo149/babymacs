@@ -12,20 +12,36 @@ brew install --with-cocoa emacs
 ln -s /usr/local/Cellar/emacs/24.5/Emacs.app /Applications
 #+END_SRC
 ** how to use
-*** reading keybindings
-- =C-= :: control
-- =M-= :: meta (alt)
-- =S-= :: shift
-- =s-= :: super (eg. OS X command key)
-- examples:
-  - =C-M-<up>= :: pressing control + alt + up at the same time
-  - =C-x C-s= :: pressing control + x then control + s
+*** glossary
+- frame :: a graphical system-level "window" (this is unfortantely quite confusing, since in emacs a window means something else)
+- window :: a part of a frame which contains a buffer
+- buffer :: contains the text to be editted - when you visit a file, the representation is stored in a buffer
+- kill :: when talking about text, this means "cut"
+- yank :: when talking about text, this means "paste"
+- keybindings
+  - =C-= :: control
+  - =M-= :: meta (alt)
+  - =S-= :: shift
+  - =s-= :: super (eg. OS X command key)
+  - examples:
+    - =C-M-<up>= :: pressing control + alt + up at the same time
+    - =C-x C-s= :: pressing control + x then control + s
+    - =C-x k= :: pressing control + x then k (without control)
+*** basics
+| C-g | cancel command / partial command |
+| M-x | enter a command                  |
 *** general
-| C-x k    | kill current buffer                      |
-| C-w      | cut selected region / current line       |
-| M-w      | copy selected region / current line      |
-| M-<up>   | move selected region / current line up   |
-| M-<down> | move selected region / current line down |
+**** keybindings
+| C-x k         | kill current buffer                      |
+| C-w           | cut selected region / current line       |
+| M-w           | copy selected region / current line      |
+| M-<up>        | move selected region / current line up   |
+| M-<down>      | move selected region / current line down |
+| S-<backspace> | delete all whitespace on cursor          |
+| C-=           | expand selected region                   |
+| C-+           | increase text size                       |
+| C--           | decrease text size                       |
+| S-<arrow>     | move cursor to other window              |
 TODO
 - movement
 - editting
@@ -34,6 +50,8 @@ TODO
 - buffer-move
 - move-text
 - winner-mode
+**** commands
+| ibuffer | view open buffers and perform commands on them |
 *** python
 - make sure the environment (eg. virtualenv) you're using has the following packages:
   - jedi
@@ -56,11 +74,12 @@ TODO
   - bind-key
   - examples
 * TODOs
+- projectile
+- comment / uncomment
+- multiple cursors
 - general
-  - comment / uncomment
   - trailing whitespace (ws-butler)
   - require-final-newline
-  - multiple cursors
   - isearch
 - prog-mode stuff
   - no word wrapping (truncate-lines-mode)
@@ -69,7 +88,6 @@ TODO
   - company
     - helm-company
   - smartparens
-- projectile
 - dired customization?
 - git-timemachine
 - wgrep

@@ -38,7 +38,6 @@ TODO
   - examples
 * TODOs
 - general
-  - winner-mode
   - comment / uncomment
   - trailing whitespace (ws-butler)
   - require-final-newline

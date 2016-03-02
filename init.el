@@ -108,6 +108,8 @@
   (bind-key "C-S-v" #'scroll-up-half-window)
   (bind-key "M-V" #'scroll-down-half-window)
   )
+;; keep history on windows: use C-c <left>/<right> to undo/redo window changes
+(winner-mode 1)
 
 ;; appearance
 ;; ---

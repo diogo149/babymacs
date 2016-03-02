@@ -21,6 +21,11 @@ TODO
 - buffer-move
 - move-text
 - winner-mode
+*** python
+- make sure the environment (eg. virtualenv) you're using has the following packages:
+  - jedi
+  - flake8
+  - autopep8
 *** magit
 TODO
 *** org

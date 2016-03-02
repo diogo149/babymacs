@@ -250,5 +250,79 @@
 	 (helm-keyboard-quit))))
     ))
 
+;; python
+;; ---
+(use-package python
+  :mode ("\\.py$" . python-mode)
+  :config
+  (progn
+    ;; auto-link with flake8
+    (add-hook 'python-mode-hook #'flycheck-mode)
+    ;; enable semantic mode (for helm-semantic-or-imenu)
+    (add-hook 'python-mode-hook #'semantic-mode)
+
+    ;; emacs reimplementation of virtualenvwrapper
+    (use-package virtualenvwrapper
+      :ensure t
+      :config
+      (progn
+	;; make shells start in virtualenv
+	(venv-initialize-interactive-shells)
+	(venv-initialize-eshell)
+	))
+
+    ;; emacs python development environment
+    ;; https://github.com/jorgenschaefer/elpy
+    (use-package elpy
+      :ensure t
+      :diminish elpy-mode
+      :config
+      (progn
+	;; use jedi as backed (seems to have better completion)
+	(setq elpy-rpc-backend "jedi")
+	;; enable elpy
+	(elpy-enable)
+	;; pop tag to be consistent with lisps and beside M-.
+	(bind-key "M-," #'pop-tag-mark elpy-mode-map)
+
+	(defun my/elpy-workon ()
+	  "Workon a virtualenv, then restart the elpy backend"
+	  (interactive)
+	  (venv-workon)
+	  (elpy-rpc-restart))
+	))
+
+    ;; allow automatically formatting buffers
+    (use-package py-autopep8
+      :ensure t
+      :config
+      (progn
+	(setq py-autopep8-options '("--max-line-length=80"))
+
+	;; minor mode to disable autopep8-ing
+	(defun my/py-autopep8-buffer ()
+	  "like py-autopep8-buffer, but only runs in python mode"
+	  (when (derived-mode-p #'python-mode)
+	    (py-autopep8-buffer)))
+
+	(define-minor-mode my/py-autopep8-mode
+	  "Minor mode to enable autopep8 on save"
+	  :lighter " P8"
+	  :init-value nil
+	  (cond
+	   (my/py-autopep8-mode
+	    (make-local-variable 'before-save-hook)
+	    (add-hook 'before-save-hook #'my/py-autopep8-buffer))
+	   (t
+	    (kill-local-variable 'before-save-hook))))
+
+	(defun my/py-autopep8-on ()
+	  "Enable my/py-autopep8-mode minor mode."
+	  (my/py-autopep8-mode 1))
+
+	(add-hook 'python-mode-hook #'my/py-autopep8-on)
+	))
+    ))
+
 )
 (message ".emacs.d loaded in %fs" (- (float-time) *emacs-load-start*))

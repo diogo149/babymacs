@@ -1,7 +1,13 @@
 * babymacs
 a beginner setup for emacs that has some nice stuff built-in
 ** installation
-simply:
 #+BEGIN_SRC sh
 git clone https://github.com/diogo149/babymacs.git ~/.emacs.d
+#+END_SRC
+** installing emacs for OS X
+- see: https://www.emacswiki.org/emacs/EmacsForMacOS
+- this assumes you have homebrew installed
+#+BEGIN_SRC sh
+brew install --with-cocoa emacs
+ln -s /usr/local/Cellar/emacs/24.5/Emacs.app /Applications
 #+END_SRC

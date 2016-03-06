@@ -131,3 +131,5 @@ TODO
     - helm-company
   - smartparens
 - wgrep
+- dired-ranger
+- dired file size on z

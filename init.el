@@ -348,8 +348,18 @@
   (progn
     ;; indent headings
     (setq org-startup-indented t)
+    ;; hide heading stars except for the last
+    (setq org-hide-leading-stars t)
     ;; use arrow instead of default ellipsis
     (setq org-ellipsis " \u25bc")
+    ;; have C-a and C-e work differently for headings and list items
+    ;; - pressing it once goes to the beginning of the entry (not counting the starts/bullets)
+    ;; - pressing it twice makes it behave like normal
+    (setq org-special-ctrl-a/e t)
+    ;; enable syntax highlighting in src blocks
+    (setq-default org-src-fontify-natively t)
+    ;; have no extra indentation on source blocks
+    (setq org-src-preserve-indentation 0)
     ;; enable word-wrap and have commands work on lines visually
     (add-hook 'org-mode-hook 'visual-line-mode)
     ;; use global (buffer-move) keys instead of org defaults

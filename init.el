@@ -319,6 +319,21 @@
          ("C-r" . phi-search-backward)
          ("M-%" . phi-replace-query)))
 
+;; prog-mode
+;; ---
+;; make certain words look red and scary
+(defun my/add-watchwords ()
+  (font-lock-add-keywords
+   nil '(("\\<\\(FIX\\(ME\\)?\\|TODO\\|HACK\\|REFACTOR\\|OPTIMIZE\\)"
+	  1 font-lock-warning-face t))))
+(add-hook 'prog-mode-hook #'my/add-watchwords)
+;; do truncate lines (don't wrap)
+(add-hook 'prog-mode-hook '(lambda () (setq truncate-lines t)))
+;; disable visual line mode (so that lines do not wrap)
+(add-hook 'prog-mode-hook '(lambda () (visual-line-mode -1)))
+;; have camelCase count as separate words (for the purpose of delete words, moving forward/back a word, etc.)
+(add-hook 'prog-mode-hook #'subword-mode)
+
 ;; org-mode
 ;; ---
 (use-package org

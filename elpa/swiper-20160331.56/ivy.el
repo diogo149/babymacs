@@ -1125,7 +1125,8 @@ See also `ivy-sort-max-size'."
     :value-type (choice
                  (const :tag "Plain sort" string-lessp)
                  (const :tag "File sort" ivy-sort-file-function-default)
-                 (const :tag "No sort" nil)))
+                 (const :tag "No sort" nil)
+                 (function :tag "Custom function")))
   :group 'ivy)
 
 (defvar ivy-index-functions-alist
@@ -1281,7 +1282,9 @@ customizations apply to the current completion session."
         (transformer-fn
          (plist-get ivy--display-transformers-list
                     (or caller (and (functionp collection)
-                                    collection)))))
+                                    collection))))
+        (original-action (and (consp action)
+                              (copy-sequence action))))
     (setq ivy-last
           (make-ivy-state
            :prompt prompt
@@ -1337,6 +1340,8 @@ customizations apply to the current completion session."
             (when recursive-ivy-last
               (ivy--reset-state (setq ivy-last recursive-ivy-last)))))
       (ivy-call)
+      (when original-action
+        (setf (ivy-state-action ivy-last) original-action))
       (when (and recursive-ivy-last
                  ivy-recursive-restore)
         (ivy--reset-state (setq ivy-last recursive-ivy-last))))))
@@ -1429,6 +1434,7 @@ This is useful for recursive `ivy-read'."
             (if (and (setq sort-fn (cdr (assoc t ivy-sort-functions-alist)))
                      (<= (length coll) ivy-sort-max-size))
                 (setq coll (cl-sort (copy-sequence coll) sort-fn))))))
+      (setq coll (ivy--set-candidates coll))
       (when preselect
         (unless (or (and require-match
                          (not (eq collection 'internal-complete-buffer)))
@@ -2416,6 +2422,8 @@ SEPARATOR is used to join the candidates."
                  (cl-incf i))))))
     str))
 
+(ivy-set-display-transformer
+ 'counsel-find-file 'ivy-read-file-transformer)
 (ivy-set-display-transformer
  'read-file-name-internal 'ivy-read-file-transformer)
 

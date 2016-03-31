@@ -80,7 +80,7 @@
 	 ((:keywords "async")
 	  (:url . "http://elpa.gnu.org/packages/async.html"))])
  (auctex .
-	 [(11 89 2)
+	 [(11 89 3)
 	  nil "Integrated environment for *TeX*" tar
 	  ((:url . "http://www.gnu.org/software/auctex/"))])
  (aumix-mode .
@@ -672,7 +672,7 @@
 	    ((:url . "http://elpa.gnu.org/packages/sed-mode.html")
 	     (:keywords))])
  (seq .
-      [(2 14)
+      [(2 15)
        nil "Sequence manipulation functions" tar
        ((:keywords "sequences")
 	(:url . "http://elpa.gnu.org/packages/seq.html"))])

@@ -1,3 +1,10 @@
+2016-03-31  Nicolas Petton  <nicolas@petton.fr>
+
+	Update seq to version 2.15
+
+	* packages/seq/seq-25.el: Require cl-lib.
+	* packages/seq/seq.el: Bump version number.
+
 2016-03-29  Nicolas Petton  <nicolas@petton.fr>
 
 	Update seq.el to version 2.14
